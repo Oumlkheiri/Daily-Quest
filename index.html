@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%AB%99%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Markazi+Text:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,18 +28,21 @@
 
   <header class="app-header">
     <span class="brand-mark" aria-hidden="true">🫙</span>
-    <button class="history-btn" id="historyBtn" type="button" aria-haspopup="dialog" aria-controls="historyDrawer" aria-label="My Quests">
-      <span class="history-btn-icon" aria-hidden="true">📖</span>
-      <span class="history-btn-label">My Quests</span>
-      <span class="count-badge" id="headerCount">0</span>
-    </button>
+    <div class="header-actions">
+      <button class="lang-toggle" id="langToggle" type="button">AR</button>
+      <button class="history-btn" id="historyBtn" type="button" aria-haspopup="dialog" aria-controls="historyDrawer" aria-label="My Quests">
+        <span class="history-btn-icon" aria-hidden="true">📖</span>
+        <span class="history-btn-label" id="historyBtnLabel">My Quests</span>
+        <span class="count-badge" id="headerCount">0</span>
+      </button>
+    </div>
   </header>
 
   <main class="stage" id="stage">
 
     <!-- ===================== JAR VIEW ===================== -->
     <section class="view jar-view" id="jarView">
-      <h1 class="title">Daily Quest</h1>
+      <h1 class="title" id="appTitle">Daily Quest</h1>
       <p class="subtitle" id="jarSubtitle">Pick a card. Do the thing. Make today count.</p>
       <p class="new-day-badge" id="newDayBadge" hidden>🌅 A new day, a new quest awaits</p>
 
@@ -129,9 +132,9 @@
       </div>
 
       <button class="btn btn-primary draw-btn" id="drawBtn" type="button">
-        <span>DRAW TODAY&rsquo;S CARD</span> <span class="sparkle">✨</span>
+        <span id="drawBtnLabel">DRAW TODAY&rsquo;S CARD</span> <span class="sparkle">✨</span>
       </button>
-      <p class="hint-text">You only get one quest today.</p>
+      <p class="hint-text" id="hintText">You only get one quest today.</p>
     </section>
 
     <!-- ===================== CARD VIEW ===================== -->
@@ -141,7 +144,7 @@
       <div class="quest-card" id="questCard">
         <div class="quest-card-inner" id="questCardInner">
           <div class="quest-card-face quest-card-front">
-            <span class="qc-mark">?</span>
+            <span class="qc-mark" id="qcMark">?</span>
             <span class="qc-front-star s1">✦</span>
             <span class="qc-front-star s2">✧</span>
             <span class="qc-front-star s3">✦</span>
@@ -160,7 +163,7 @@
 
   </main>
 
-  <p class="footer-note">made for a little daily spark ✦</p>
+  <p class="footer-note" id="footerNote">made for a little daily spark ✦</p>
 </div>
 
 <!-- ===================== HISTORY DRAWER ===================== -->
@@ -171,7 +174,7 @@
     <h2 id="historyTitle">My Quests</h2>
     <button class="drawer-close" id="drawerClose" type="button" aria-label="Close">✕</button>
   </div>
-  <p class="drawer-counter">Quests completed: <strong id="drawerCount">0</strong></p>
+  <p class="drawer-counter"><span id="drawerCounterLabel">Quests completed:</span> <strong id="drawerCount">0</strong></p>
   <div class="history-list" id="historyList"></div>
 </div>
 
