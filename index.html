@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FBF3E7">
+<title>Daily Quest Jar</title>
+<meta name="description" content="Pick a card. Do the thing. Make today count.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%AB%99%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="floaters" aria-hidden="true">
+  <span class="floater f1">✦</span>
+  <span class="floater f2">♡</span>
+  <span class="floater f3">✧</span>
+  <span class="floater f4">✦</span>
+  <span class="floater f5">♡</span>
+  <span class="floater f6">✧</span>
+  <span class="floater f7">✦</span>
+</div>
+
+<div class="app-shell">
+
+  <header class="app-header">
+    <span class="brand-mark" aria-hidden="true">🫙</span>
+    <button class="history-btn" id="historyBtn" type="button" aria-haspopup="dialog" aria-controls="historyDrawer" aria-label="My Quests">
+      <span class="history-btn-icon" aria-hidden="true">📖</span>
+      <span class="history-btn-label">My Quests</span>
+      <span class="count-badge" id="headerCount">0</span>
+    </button>
+  </header>
+
+  <main class="stage" id="stage">
+
+    <!-- ===================== JAR VIEW ===================== -->
+    <section class="view jar-view" id="jarView">
+      <h1 class="title">Daily Quest</h1>
+      <p class="subtitle" id="jarSubtitle">Pick a card. Do the thing. Make today count.</p>
+      <p class="new-day-badge" id="newDayBadge" hidden>🌅 A new day, a new quest awaits</p>
+
+      <div class="jar-wrap" id="jarWrap">
+        <svg class="jar-svg" id="jarSvg" viewBox="0 0 220 260" aria-hidden="true">
+          <defs>
+            <filter id="handDrawn" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="glassGrad" x1="0" y1="0" x2="0.85" y2="1">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.7"/>
+              <stop offset="45%" stop-color="#FFF9EE" stop-opacity="0.32"/>
+              <stop offset="100%" stop-color="#F1E2C7" stop-opacity="0.55"/>
+            </linearGradient>
+          </defs>
+
+          <ellipse class="jar-shadow" cx="110" cy="246" rx="62" ry="10"/>
+
+          <!-- handful of little paper cards peeking inside -->
+          <g class="jar-cards">
+            <g transform="translate(95,93) rotate(-18)">
+              <rect class="jc-card" x="-17" y="-23" width="34" height="46" rx="6" fill="#F3C7D6"/>
+              <polygon points="17,-23 17,-15 9,-23" fill="#E3A8BB"/>
+              <line x1="-9" y1="-3" x2="9" y2="-3" class="jc-scribble"/>
+              <line x1="-9" y1="5" x2="3" y2="5" class="jc-scribble"/>
+            </g>
+            <g transform="translate(125,83) rotate(10)">
+              <rect class="jc-card" x="-17" y="-23" width="34" height="46" rx="6" fill="#CFE3DC"/>
+              <polygon points="17,-23 17,-15 9,-23" fill="#AFD0C4"/>
+              <line x1="-9" y1="-3" x2="9" y2="-3" class="jc-scribble"/>
+              <line x1="-9" y1="5" x2="3" y2="5" class="jc-scribble"/>
+            </g>
+            <g transform="translate(109,101) rotate(-4)">
+              <rect class="jc-card" x="-17" y="-23" width="34" height="46" rx="6" fill="#FBE0B0"/>
+              <polygon points="17,-23 17,-15 9,-23" fill="#E8C48F"/>
+              <line x1="-9" y1="-3" x2="9" y2="-3" class="jc-scribble"/>
+              <line x1="-9" y1="5" x2="3" y2="5" class="jc-scribble"/>
+            </g>
+            <g transform="translate(81,107) rotate(-24)">
+              <rect class="jc-card" x="-15" y="-21" width="30" height="42" rx="6" fill="#DCE0F4"/>
+              <polygon points="15,-21 15,-13 7,-21" fill="#BFC6E8"/>
+              <line x1="-7" y1="-2" x2="7" y2="-2" class="jc-scribble"/>
+              <line x1="-7" y1="5" x2="2" y2="5" class="jc-scribble"/>
+            </g>
+            <g transform="translate(137,103) rotate(20)">
+              <rect class="jc-card" x="-15" y="-21" width="30" height="42" rx="6" fill="#E7D6F1"/>
+              <polygon points="15,-21 15,-13 7,-21" fill="#CBB2DE"/>
+              <line x1="-7" y1="-2" x2="7" y2="-2" class="jc-scribble"/>
+              <line x1="-7" y1="5" x2="2" y2="5" class="jc-scribble"/>
+            </g>
+          </g>
+
+          <!-- jar glass body, hand-drawn wobble -->
+          <path class="jar-body" filter="url(#handDrawn)" d="M55 96
+            L48 210
+            Q48 234 74 234
+            L146 234
+            Q172 234 172 210
+            L165 96
+            Q165 88 158 88
+            L62 88
+            Q55 88 55 96 Z"/>
+
+          <!-- glass shine -->
+          <path class="jar-shine" d="M70 108 Q66 160 74 206" />
+
+          <!-- neck -->
+          <path class="jar-neck" filter="url(#handDrawn)" d="M66 62 L62 88 L158 88 L154 62 Z"/>
+
+          <!-- lid -->
+          <g class="jar-lid" filter="url(#handDrawn)">
+            <rect x="58" y="46" width="104" height="20" rx="9"/>
+            <rect x="66" y="36" width="88" height="16" rx="8"/>
+            <ellipse cx="110" cy="36" rx="44" ry="7" fill="#fff" opacity="0.15"/>
+          </g>
+
+          <!-- twine bow tied around the neck -->
+          <g class="jar-bow" filter="url(#handDrawn)">
+            <path d="M110 76 C 97 60, 76 64, 85 80 C 91 91, 104 85, 110 76 Z"/>
+            <path d="M110 76 C 123 60, 144 64, 135 80 C 129 91, 116 85, 110 76 Z"/>
+            <path d="M105 79 L98 97 L107 91 Z"/>
+            <path d="M115 79 L122 97 L113 91 Z"/>
+            <circle cx="110" cy="77" r="5"/>
+          </g>
+        </svg>
+      </div>
+
+      <button class="btn btn-primary draw-btn" id="drawBtn" type="button">
+        <span>DRAW TODAY&rsquo;S CARD</span> <span class="sparkle">✨</span>
+      </button>
+      <p class="hint-text">You only get one quest today.</p>
+    </section>
+
+    <!-- ===================== CARD VIEW ===================== -->
+    <section class="view card-view" id="cardView" hidden>
+      <p class="eyebrow" id="cardEyebrow">Today&rsquo;s Quest</p>
+
+      <div class="quest-card" id="questCard">
+        <div class="quest-card-inner" id="questCardInner">
+          <div class="quest-card-face quest-card-front">
+            <span class="qc-mark">?</span>
+            <span class="qc-front-star s1">✦</span>
+            <span class="qc-front-star s2">✧</span>
+            <span class="qc-front-star s3">✦</span>
+          </div>
+          <div class="quest-card-face quest-card-back">
+            <span class="quest-category-chip" id="cardCategory">Creative</span>
+            <p class="quest-task-text" id="cardTask">&nbsp;</p>
+            <span class="quest-duration" id="cardDuration">⏱ 30&ndash;45 min</span>
+            <span class="done-stamp" id="doneStamp">✓ Completed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-actions" id="cardActions"></div>
+    </section>
+
+  </main>
+
+  <p class="footer-note">made for a little daily spark ✦</p>
+</div>
+
+<!-- ===================== HISTORY DRAWER ===================== -->
+<div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+<div class="history-drawer" id="historyDrawer" role="dialog" aria-modal="true" aria-labelledby="historyTitle" hidden>
+  <div class="drawer-handle"></div>
+  <div class="drawer-header">
+    <h2 id="historyTitle">My Quests</h2>
+    <button class="drawer-close" id="drawerClose" type="button" aria-label="Close">✕</button>
+  </div>
+  <p class="drawer-counter">Quests completed: <strong id="drawerCount">0</strong></p>
+  <div class="history-list" id="historyList"></div>
+</div>
+
+<div id="srAnnounce" class="sr-only" aria-live="polite"></div>
+<div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
